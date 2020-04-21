@@ -12,23 +12,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-@Entity
-public class Produto implements  Serializable{
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
-	
+@Entity
+public class Produto implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private Double preco;
-	
+
+	/*
+	 * a expressão "@JsonBackReference" serve pra resolver referencia ciclica, pois
+	 * na categoria ja foi feita a busca dos objetos e n busco mais - muitos pra
+	 * muitos olhar "referencia ciclica", lembrar de colocar a
+	 * expressão @JsonManagedReference em categoria. em alguns casos é preciso
+	 * implementar essa referencia ciclica
+	 * --No console aparece muitos dados e trava aplicacao 
+	 */
+
+	@JsonBackReference 
 	@ManyToMany
-	@JoinTable(name = "PRODUTO_CATEGORIA",
-		joinColumns = @JoinColumn(name = "produto_id"),
-		inverseJoinColumns = @JoinColumn(name = "categoria_id")
-	)
+	@JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private List<Categoria> categorias = new ArrayList<>();
 
 	public Produto() {
