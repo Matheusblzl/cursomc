@@ -14,11 +14,11 @@ import com.maiconsantos.cursomc.services.exception.ObjectNotFoundException;
 public class CategoriaService {
 
 	@Autowired
-	private CategoriaRepository repository;
+	private CategoriaRepository categoriaRepositoryrepository;
 
 
 	public Categoria find(Integer id) {
-		Optional<Categoria> obj = repository.findById(id);
+		Optional<Categoria> obj = categoriaRepositoryrepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
