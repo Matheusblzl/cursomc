@@ -11,6 +11,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.maiconsantos.cursomc.domain.enums.EstadoPagamento;
 //usa o abstract pra garantir que o pagamento n seja instanciado, só faz istancia com pgm boleto e cartão
 
@@ -19,6 +20,7 @@ import com.maiconsantos.cursomc.domain.enums.EstadoPagamento;
 //strategy = InheritanceType.JOINED CRIA DUAS TABELAS
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public abstract class Pagamento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
