@@ -141,7 +141,7 @@ public class Cliente implements Serializable {
 		this.senha = senha;
 	}
 	
-	public Set<Perfil> getPerfis() {//para cada elemento dessa coleção eu transormo o ineger em ENUM - METODO toEnum
+	public Set<Perfil> getPerfis() {//para cada elemento dessa coleção eu transormo o integer em ENUM - METODO toEnum
 		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
